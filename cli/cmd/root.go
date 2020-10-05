@@ -17,6 +17,9 @@ var (
 				versionCmd.Run(cmd, args)
 				os.Exit(0)
 			}
+
+			cmd.Help()
+			os.Exit(0)
 		},
 	}
 )
