@@ -26,14 +26,20 @@ func (m *Model) Generate() string {
 	token := m.Tokens[start]
 
 	var sb strings.Builder
+	first := true
+
 	for {
 		if token == nil {
 			break
 		}
 
-		sb.WriteString(token.Value)
-		sb.WriteRune(' ')
+		if first == true {
+			first = false
+		} else {
+			sb.WriteRune(' ')
+		}
 
+		sb.WriteString(token.Value)
 		token = token.SelectNext(m)
 	}
 
