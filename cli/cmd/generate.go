@@ -13,7 +13,7 @@ import (
 var (
 	generateCmd = &cobra.Command{
 		Use:   "generate",
-		Short: "uses a model from stdin to output new strings to stdout",
+		Short: "Read model from stdin and output generated lines to stdout",
 		Run: func(cmd *cobra.Command, args []string) {
 			reader := bufio.NewReader(os.Stdin)
 			writer := bufio.NewWriter(os.Stdout)

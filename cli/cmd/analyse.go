@@ -12,7 +12,7 @@ import (
 var (
 	analyseCmd = &cobra.Command{
 		Use:   "analyse",
-		Short: "reads lines from stdin and outputs a model file to stdout",
+		Short: "Read lines from stdin and output a model file to stdout",
 		Run: func(cmd *cobra.Command, args []string) {
 			reader := bufio.NewReader(os.Stdin)
 			writer := bufio.NewWriter(os.Stdout)

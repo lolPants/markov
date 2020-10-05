@@ -11,8 +11,9 @@ Markov is a CLI tool, and as such you can read the included help with `markov --
 
 ```
 Available Commands:
-  analyse     reads lines from stdin and outputs a model file to stdout
-  generate    uses a model from stdin to output new strings to stdout
+  analyse     Read lines from stdin and output a model file to stdout
+  completion  Generate completion script
+  generate    Read model from stdin and output generated lines to stdout
   help        Help about any command
   version     Print version information
 
