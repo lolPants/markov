@@ -14,6 +14,13 @@ var (
 		Use:   "analyse",
 		Short: "Read lines from stdin and output a model file to stdout",
 		Run: func(cmd *cobra.Command, args []string) {
+			if checkStreamIsPipe() == false {
+				fmt.Fprintln(os.Stderr, "lines must be input via shell redirection or piping")
+
+				os.Exit(1)
+				return
+			}
+
 			reader := bufio.NewReader(os.Stdin)
 			writer := bufio.NewWriter(os.Stdout)
 			defer writer.Flush()
