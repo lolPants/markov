@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bufio"
+	"compress/gzip"
 	"fmt"
 	"os"
 
@@ -27,9 +28,22 @@ var (
 			defer writer.Flush()
 
 			model := markov.NewModel()
-			err := model.ImportReader(reader)
-			if err != nil {
-				fmt.Fprintln(os.Stderr, err.Error())
+
+			if viper.GetBool("gzip-generate") {
+				gz, err := gzip.NewReader(reader)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err.Error())
+				}
+
+				err = model.ImportReader(gz)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err.Error())
+				}
+			} else {
+				err := model.ImportReader(reader)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err.Error())
+				}
 			}
 
 			lines := viper.GetInt("lines")
@@ -46,4 +60,7 @@ func init() {
 
 	generateCmd.Flags().UintP("lines", "L", 1, "number of lines to generate")
 	viper.BindPFlag("lines", generateCmd.Flags().Lookup("lines"))
+
+	generateCmd.Flags().BoolP("gzip", "Z", false, "enable gzip compression")
+	viper.BindPFlag("gzip-generate", generateCmd.Flags().Lookup("gzip"))
 }
