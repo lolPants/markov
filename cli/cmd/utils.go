@@ -4,8 +4,8 @@ import (
 	"os"
 )
 
-func checkStreamIsPipe() bool {
-	fi, _ := os.Stdin.Stat()
+func checkIsPipe(f *os.File) bool {
+	fi, _ := f.Stat()
 	if (fi.Mode() & os.ModeCharDevice) == 0 {
 		return true
 	}

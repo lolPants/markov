@@ -14,7 +14,7 @@ var (
 		Use:   "analyse",
 		Short: "Read lines from stdin and output a model file to stdout",
 		Run: func(cmd *cobra.Command, args []string) {
-			if checkStreamIsPipe() == false {
+			if checkIsPipe(os.Stdin) == false {
 				fmt.Fprintln(os.Stderr, "lines must be input via shell redirection or piping")
 
 				os.Exit(1)

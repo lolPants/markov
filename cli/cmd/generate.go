@@ -15,7 +15,7 @@ var (
 		Use:   "generate",
 		Short: "Read model from stdin and output generated lines to stdout",
 		Run: func(cmd *cobra.Command, args []string) {
-			if checkStreamIsPipe() == false {
+			if checkIsPipe(os.Stdin) == false {
 				fmt.Fprintln(os.Stderr, "model must be input via shell redirection or piping")
 
 				os.Exit(1)
