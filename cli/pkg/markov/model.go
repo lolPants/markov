@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"io"
 	"strings"
+
+	"github.com/spf13/viper"
 )
 
 // NewModel creates a new Markov Model
@@ -48,6 +50,11 @@ func (m *Model) Generate() string {
 
 // Export exports the model as a JSON byte slice
 func (m *Model) Export() ([]byte, error) {
+	if viper.GetBool("pretty") {
+		bytes, err := json.MarshalIndent(m, "", "  ")
+		return bytes, err
+	}
+
 	bytes, err := json.Marshal(m)
 	return bytes, err
 }
@@ -55,6 +62,10 @@ func (m *Model) Export() ([]byte, error) {
 // ExportWriter exports the model JSON to the passed writer
 func (m *Model) ExportWriter(w io.Writer) error {
 	enc := json.NewEncoder(w)
+	if viper.GetBool("pretty") {
+		enc.SetIndent("", "  ")
+	}
+
 	return enc.Encode(m)
 }
 

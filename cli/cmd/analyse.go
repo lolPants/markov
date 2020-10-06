@@ -61,4 +61,7 @@ func init() {
 
 	analyseCmd.Flags().BoolP("gzip", "Z", false, "enable gzip compression")
 	viper.BindPFlag("gzip-analyse", analyseCmd.Flags().Lookup("gzip"))
+
+	analyseCmd.Flags().BoolP("pretty", "P", false, "pretty print model JSON")
+	viper.BindPFlag("pretty", analyseCmd.Flags().Lookup("pretty"))
 }
