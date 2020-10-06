@@ -11,9 +11,6 @@ func init() {
 
 func weightedRandomIdx(weights []int) int {
 	var totalWeight int
-	// var i int
-	// var random float64
-
 	for _, weight := range weights {
 		totalWeight += weight
 	}
