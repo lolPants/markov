@@ -9,7 +9,7 @@ const (
 func NewToken(value string) *Token {
 	return &Token{
 		Value: value,
-		Next:  newWordMap(),
+		Next:  make(wordMap),
 	}
 }
 

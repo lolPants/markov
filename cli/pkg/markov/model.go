@@ -10,7 +10,7 @@ import (
 func NewModel() *Model {
 	return &Model{
 		Tokens:      make(map[string]*Token),
-		StartTokens: newWordMap(),
+		StartTokens: make(wordMap),
 	}
 }
 
